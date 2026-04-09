@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>국회의원 랭킹 | 22대 국회 회의록 기반 막말·궤변 분석</title>
+    <meta name="description" content="22대 국회 의원별 종합 점수, 사례 수, 회의 수를 기준으로 전체 랭킹을 한 페이지에서 확인할 수 있습니다.">
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="국회의원 랭킹 | 22대 국회 회의록 기반 막말·궤변 분석">
+    <meta property="og:description" content="22대 국회 의원별 종합 점수, 사례 수, 회의 수를 기준으로 전체 랭킹을 한 페이지에서 확인할 수 있습니다.">
+    <meta property="og:url" content="https://example.com/rankings/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="국회의원 랭킹 | 22대 국회 회의록 기반 막말·궤변 분석">
+    <meta name="twitter:description" content="22대 국회 의원별 종합 점수, 사례 수, 회의 수를 기준으로 전체 랭킹을 한 페이지에서 확인할 수 있습니다.">
+    <link rel="canonical" href="https://example.com/rankings/">
+    <link rel="stylesheet" href="../public/site.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body>
+
+    <div class="shell page-shell">
+        
+    <nav class="top-nav" aria-label="주요 탐색">
+        <div class="top-nav-links">
+        <a href="../">홈 대시보드</a>
+        <a href="../rankings/" class="is-active">국회의원 랭킹</a>
+        <a href="../findings/">문제 발언 목록</a>
+        <a href="../sessions/">회의록 분석 목록</a>
+        <a href="../methodology/">점수 산정 기준</a>
+        <a href="../about/">프로젝트 소개</a>
+        </div>
+        
+    <div class="nav-status" aria-label="데이터 수집 상태 안내">
+        <button type="button" class="nav-status-trigger" aria-haspopup="dialog">
+            수집·분석 진행 중
+        </button>
+        <div class="nav-status-popover" role="dialog" aria-label="데이터 수집 상태 안내">
+            <p class="nav-status-kicker">수집·분석 진행 중</p>
+            <h2 class="nav-status-title">현재 전체 회의록 반영 전 중간 집계입니다.</h2>
+            <p class="nav-status-description">현재 22대 국회 회의록은 계속 수집·분석 중입니다. 이 사이트의 랭킹과 점수는 전체 회의록이 아니라 현재까지 처리 완료된 회의만 기준으로 집계됩니다. 따라서 의원별 점수와 순위는 이후 데이터가 추가되면 달라질 수 있습니다.</p>
+            <div class="nav-status-actions">
+                <a class="nav-status-link" href="../methodology/">해석 기준 보기</a>
+            </div>
+        </div>
+    </div>
+    
+    </nav>
+    
+        <main>
+            <header class="panel hero hero-header">
+                <div class="hero-copy">
+                    <p class="eyebrow">Full Ranking</p>
+                    <h1 class="hero-title">국회의원 랭킹</h1>
+                </div>
+            </header>
+            <section class="mt-6 rounded-[24px] border border-[var(--line)] bg-white/88 px-5 py-5 shadow-[0_18px_40px_rgba(19,33,47,0.08)] backdrop-blur">
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                    <div>
+                        <p class="text-xs font-semibold tracking-[0.18em] text-[var(--navy)]">FILTERS</p>
+                        <h2 class="mt-2 text-xl font-semibold text-[var(--ink)]">정당 선택</h2>
+                        <p class="mt-2 text-sm leading-6 text-[var(--muted)]">여러 정당을 동시에 선택해 목록을 좁혀 볼 수 있습니다. 표 헤더를 누르면 해당 열 기준으로 정렬됩니다.</p>
+                    </div>
+                    <div class="lg:min-w-[560px]">
+                        <div class="mb-3 flex items-center justify-between gap-3">
+                            <span class="text-[11px] font-semibold tracking-[0.14em] text-[var(--navy)]">정당 필터</span>
+                            <button id="party-filter-reset" type="button" class="rounded-full border border-[var(--line)] bg-white px-3 py-1.5 text-xs font-semibold text-[var(--navy)] transition hover:border-[var(--navy)] hover:bg-slate-50">전체 선택</button>
+                        </div>
+                        <div id="party-filter-list" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+            </section>
+            <div id="speaker-table-shell" class="mt-6 hidden overflow-hidden rounded-[22px] border border-[var(--line)] bg-white/75">
+                <div class="hidden grid-cols-[72px_1.2fr_0.8fr_120px_120px_120px] gap-4 border-b border-[var(--line)] px-5 py-4 text-xs font-semibold tracking-[0.12em] text-[var(--muted)] lg:grid">
+                    <div>순위</div>
+                    <div><button type="button" class="table-sort-button ranking-sort-button" data-sort-key="speaker">의원</button></div>
+                    <div><button type="button" class="table-sort-button ranking-sort-button" data-sort-key="party">정당 / 지역</button></div>
+                    <div><button type="button" class="table-sort-button ranking-sort-button" data-sort-key="score">종합 점수</button></div>
+                    <div><button type="button" class="table-sort-button ranking-sort-button" data-sort-key="findings">사례 수</button></div>
+                    <div><button type="button" class="table-sort-button ranking-sort-button" data-sort-key="meetings">회의 수</button></div>
+                </div>
+                <div id="speaker-table"></div>
+            </div>
+            
+    <footer class="footer site-footer">
+        <p>업데이트 날짜: 2026-04-09 16:33 KST</p>
+        <p><a class="footer-feedback-link" href="https://docs.google.com/forms/d/e/1FAIpQLScNinEXD9uYYJbw6YRgSNBpDzGLiDrrr8Ak8-Nem0pbVrxCcg/viewform?usp=dialog" target="_blank" rel="noreferrer">의견 남기기</a></p>
+    </footer>
+    
+        </main>
+    </div>
+    
+    <script>
+        const DATA_PATH = "../public/data.json";
+        let speakerCards = [];
+        let currentSortKey = "score";
+        let currentSortDir = "desc";
+        let selectedParties = new Set();
+
+        const scorePillClass = (score) => {
+            if (score >= 6) return "score-pill-high";
+            if (score <= 2.5) return "score-pill-low";
+            return "score-pill-mid";
+        };
+
+        const formatNumber = (value) => new Intl.NumberFormat("ko-KR").format(value ?? 0);
+
+        const resolvePhotoPath = (path) => {
+            if (!path) return "";
+            if (path.startsWith("http://") || path.startsWith("https://")) return path;
+            if (path.startsWith("../")) return path;
+            if (path.startsWith("./")) return `..${path.slice(1)}`;
+            if (path.startsWith("teststuff/")) return `../${path}`;
+            return path;
+        };
+
+        const escapeHtml = (value = "") => value
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#39;");
+
+        const partyColorClass = (party) => {
+            const key = (party || "").trim().toLowerCase();
+            if (key.includes("민주당")) return "party-blue";
+            if (key.includes("국민의힘")) return "party-red";
+            if (key.includes("개혁신당")) return "party-orange";
+            if (key.includes("정의당")) return "party-yellow";
+            if (key.includes("조국당")) return "party-sky";
+            return "party-gray";
+        };
+
+        const partyChip = (party) => `<span class="party-chip ${partyColorClass(party)}">${escapeHtml(party || "알 수 없음")}</span>`;
+
+        function photoBlock(name, path) {
+            const resolved = resolvePhotoPath(path);
+            if (resolved) {
+                return `<img src="${escapeHtml(resolved)}" alt="${escapeHtml(name)}" class="photo h-14 w-14 rounded-2xl object-cover" loading="lazy">`;
+            }
+            return `<div class="photo flex h-14 w-14 items-center justify-center rounded-2xl text-lg font-semibold text-[var(--navy)]">${escapeHtml(name.slice(0, 1) || "?")}</div>`;
+        }
+
+        function collectSpeakerCards(data) {
+            const speakers = Object.values(data.speakers || {});
+            return speakers.map((item) => ({
+                speaker: item.speaker,
+                url: item.url,
+                party: item.party || "알 수 없음",
+                region: item.region || "지역 정보 없음",
+                aggregate_score: Number(item.aggregate_score || 0),
+                findings_count: Number(item.findings_count || 0),
+                meeting_count: Number(item.meeting_count || 0),
+                summary_reason: item.summary_reason || "요약 사유 없음",
+                photo_path: item.photo_path || "",
+            }));
+        }
+
+        function updatePartyFilterOptions(items) {
+            const parties = [...new Set(items.map((item) => item.party || "알 수 없음"))].sort((a, b) => a.localeCompare(b, "ko"));
+            if (selectedParties.size === 0) {
+                parties.forEach((party) => selectedParties.add(party));
+            } else {
+                selectedParties = new Set(parties.filter((party) => selectedParties.has(party)));
+                if (selectedParties.size === 0) {
+                    parties.forEach((party) => selectedParties.add(party));
+                }
+            }
+
+            const target = document.getElementById("party-filter-list");
+            target.innerHTML = parties.map((party) => `
+                <label class="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--line)] bg-white px-3 py-2 text-sm text-[var(--ink)] transition hover:border-[var(--navy)] hover:bg-slate-50">
+                    <input type="checkbox" class="h-4 w-4 rounded border-slate-300 text-[var(--navy)] focus:ring-slate-300" value="${escapeHtml(party)}" ${selectedParties.has(party) ? "checked" : ""}>
+                    <span>${partyChip(party)}</span>
+                </label>
+            `).join("");
+
+            target.querySelectorAll('input[type="checkbox"]').forEach((input) => {
+                input.addEventListener("change", () => {
+                    const value = input.value;
+                    if (input.checked) {
+                        selectedParties.add(value);
+                    } else {
+                        selectedParties.delete(value);
+                    }
+                    renderSpeakerTable();
+                });
+            });
+
+            document.getElementById("party-filter-reset").onclick = () => {
+                selectedParties = new Set(parties);
+                updatePartyFilterOptions(speakerCards);
+                renderSpeakerTable();
+            };
+        }
+
+        function updateSortButtons() {
+            document.querySelectorAll(".ranking-sort-button").forEach((button) => {
+                const active = button.dataset.sortKey === currentSortKey;
+                button.classList.toggle("is-active", active);
+                button.setAttribute("aria-sort", active ? currentSortDir : "none");
+            });
+        }
+
+        function renderSpeakerTable() {
+            const target = document.getElementById("speaker-table");
+            const shell = document.getElementById("speaker-table-shell");
+
+            let items = speakerCards.slice();
+            items = selectedParties.size === 0
+                ? []
+                : items.filter((item) => selectedParties.has(item.party || "알 수 없음"));
+
+            shell.classList.remove("hidden");
+
+            const compareText = (left, right) => left.localeCompare(right, "ko");
+            const sorters = {
+                rank: (a, b) => b.aggregate_score - a.aggregate_score || b.findings_count - a.findings_count || compareText(a.speaker, b.speaker),
+                speaker: (a, b) => compareText(a.speaker, b.speaker),
+                party: (a, b) => compareText(a.party, b.party) || compareText(a.region, b.region) || compareText(a.speaker, b.speaker),
+                score: (a, b) => b.aggregate_score - a.aggregate_score || b.findings_count - a.findings_count || compareText(a.speaker, b.speaker),
+                findings: (a, b) => b.findings_count - a.findings_count || b.aggregate_score - a.aggregate_score || compareText(a.speaker, b.speaker),
+                meetings: (a, b) => b.meeting_count - a.meeting_count || b.aggregate_score - a.aggregate_score || compareText(a.speaker, b.speaker),
+            };
+            items.sort(sorters[currentSortKey] || sorters.score);
+            if (currentSortDir === "asc") {
+                items.reverse();
+            }
+
+            if (items.length === 0) {
+                target.innerHTML = `<div class="px-5 py-10 text-sm text-[var(--muted)]">조건에 맞는 의원이 없습니다.</div>`;
+                updateSortButtons();
+                return;
+            }
+
+            target.innerHTML = items.map((item, index) => `
+                <a href="${escapeHtml(item.url || "#")}" class="table-row grid gap-4 border-b border-[var(--line)] px-5 py-4 transition last:border-b-0 lg:grid-cols-[72px_1.2fr_0.8fr_120px_120px_120px] lg:items-center">
+                    <div class="text-sm font-semibold text-[var(--muted)]">${index + 1}</div>
+                    <div class="flex items-center gap-3">
+                        ${photoBlock(item.speaker, item.photo_path)}
+                        <div class="min-w-0">
+                            <div class="font-semibold">${escapeHtml(item.speaker)}</div>
+                            <div class="mt-1 line-clamp-1 text-sm text-[var(--muted)]">${escapeHtml(item.summary_reason || "요약 사유 없음")}</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-[var(--muted)]">${partyChip(item.party)}<br>${escapeHtml(item.region || "지역 정보 없음")}</div>
+                    <div><span class="rounded-full px-3 py-1 text-sm ${scorePillClass(item.aggregate_score)}">${item.aggregate_score.toFixed(2)}점</span></div>
+                    <div class="text-sm">${formatNumber(item.findings_count)}건</div>
+                    <div class="text-sm">${formatNumber(item.meeting_count)}회</div>
+                </a>
+            `).join("");
+            updateSortButtons();
+        }
+
+        function renderEmptyState(message) {
+            document.querySelector("main").innerHTML = `
+                <section class="panel rounded-[26px] p-10 text-center">
+                    <h2 class="text-2xl font-semibold">데이터를 불러오지 못했습니다</h2>
+                    <p class="mt-4 text-sm leading-7 text-[var(--muted)]">${escapeHtml(message)}</p>
+                </section>
+            `;
+        }
+
+        async function loadRankings() {
+            try {
+                const response = await fetch(DATA_PATH);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                speakerCards = collectSpeakerCards(data);
+                updatePartyFilterOptions(speakerCards);
+                renderSpeakerTable();
+                document.querySelectorAll(".ranking-sort-button").forEach((button) => {
+                    button.addEventListener("click", () => {
+                        const nextKey = button.dataset.sortKey;
+                        if (nextKey === currentSortKey) {
+                            currentSortDir = currentSortDir === "asc" ? "desc" : "asc";
+                        } else {
+                            currentSortKey = nextKey;
+                            currentSortDir = nextKey === "speaker" || nextKey === "party" ? "asc" : "desc";
+                        }
+                        renderSpeakerTable();
+                    });
+                });
+            } catch (error) {
+                console.error(error);
+                renderEmptyState("`scripts/prepare_web_data.py` 실행 후 `web/public/data.json`이 생성되어 있는지 확인하세요.");
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", loadRankings);
+    </script>
+    
+    
+</body>
+</html>

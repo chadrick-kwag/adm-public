@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>막말·궤변 점수 산정 기준 | 회의록 기반 분석 방법론</title>
+    <meta name="description" content="국회 회의록 기반 막말·궤변 분석 사이트의 수집 범위, 점수 산정 원칙, 최신 분석 기준을 설명합니다.">
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="막말·궤변 점수 산정 기준 | 회의록 기반 분석 방법론">
+    <meta property="og:description" content="국회 회의록 기반 막말·궤변 분석 사이트의 수집 범위, 점수 산정 원칙, 최신 분석 기준을 설명합니다.">
+    <meta property="og:url" content="https://example.com/methodology/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="막말·궤변 점수 산정 기준 | 회의록 기반 분석 방법론">
+    <meta name="twitter:description" content="국회 회의록 기반 막말·궤변 분석 사이트의 수집 범위, 점수 산정 원칙, 최신 분석 기준을 설명합니다.">
+    <link rel="canonical" href="https://example.com/methodology/">
+    <link rel="stylesheet" href="../public/site.css">
+    
+    
+</head>
+<body>
+
+    <div class="shell page-shell">
+        
+    <nav class="top-nav" aria-label="주요 탐색">
+        <div class="top-nav-links">
+        <a href="../">홈 대시보드</a>
+        <a href="../rankings/">국회의원 랭킹</a>
+        <a href="../findings/">문제 발언 목록</a>
+        <a href="../sessions/">회의록 분석 목록</a>
+        <a href="../methodology/" class="is-active">점수 산정 기준</a>
+        <a href="../about/">프로젝트 소개</a>
+        </div>
+        
+    <div class="nav-status" aria-label="데이터 수집 상태 안내">
+        <button type="button" class="nav-status-trigger" aria-haspopup="dialog">
+            수집·분석 진행 중
+        </button>
+        <div class="nav-status-popover" role="dialog" aria-label="데이터 수집 상태 안내">
+            <p class="nav-status-kicker">수집·분석 진행 중</p>
+            <h2 class="nav-status-title">현재 전체 회의록 반영 전 중간 집계입니다.</h2>
+            <p class="nav-status-description">현재 22대 국회 회의록은 계속 수집·분석 중입니다. 이 사이트의 랭킹과 점수는 전체 회의록이 아니라 현재까지 처리 완료된 회의만 기준으로 집계됩니다. 따라서 의원별 점수와 순위는 이후 데이터가 추가되면 달라질 수 있습니다.</p>
+            <div class="nav-status-actions">
+                <a class="nav-status-link" href="../methodology/">해석 기준 보기</a>
+            </div>
+        </div>
+    </div>
+    
+    </nav>
+    
+        <main>
+            <header class="panel hero hero-header">
+                <div class="hero-copy">
+                    <p class="eyebrow">Methodology</p>
+                    <h1 class="hero-title">막말·궤변 점수 산정 기준</h1>
+                </div>
+            </header>
+            <section class="panel panel-section" style="margin-top:24px;">
+                <div class="section-heading">
+                    <p class="section-kicker">Coverage</p>
+                    <h2 class="section-title">현재 집계 범위 안내</h2>
+                </div>
+                <div class="list" style="margin-top:24px;">
+                    <article class="card">
+                        <h3>현재 전체 회의록 반영 전 중간 집계입니다.</h3>
+                        <p>현재 22대 국회 회의록은 계속 수집·분석 중입니다. 이 사이트의 랭킹과 점수는 전체 회의록이 아니라 현재까지 처리 완료된 회의만 기준으로 집계됩니다. 따라서 의원별 점수와 순위는 이후 데이터가 추가되면 달라질 수 있습니다.</p>
+                    </article>
+                </div>
+            </section>
+            <section class="panel panel-section" style="margin-top:24px;">
+                <div class="section-heading">
+                    <p class="section-kicker">Score Flow</p>
+                    <h2 class="section-title">점수 계산 방식</h2>
+                </div>
+                
+                <div class="list" style="margin-top:24px;">
+                    <article class="card">
+                        <h3>1. 회의 내 의원별 점수</h3>
+                        <p>AI 모델이 각 회의에서 발언자별 언행의 부적절함을 점수표 기준에 따라 10점 만점으로 평가해 회의 내 의원별 점수를 부여한다.</p>
+                        <div class="data-table-wrap" style="margin-top:16px;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th class="score-col">점수 범위</th>
+                                        <th>문제 수준</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="score-col">0~2점</td>
+                                        <td>매우 품격 있고 논리적인 발언</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="score-col">3~5점</td>
+                                        <td>가끔 감정적이거나 논리가 부족한 발언</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="score-col">6~8점</td>
+                                        <td>빈번한 인신공격이나 억지 주장</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="score-col">9~10점</td>
+                                        <td>극도로 무례하거나 회의 진행을 방해하는 수준</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <h3>2. 개별 의원 종합점수</h3>
+                        <p>한 의원의 종합점수는 여러 회의의 점수를 단순 평균하지 않는다. 각 회의에서 검출된 막말/궤변 사례 수를 가중치로 두고 회의별 점수를 가중평균한다. 해당 회의에서 막말/궤변 사례가 0건이어도 최소 가중치 1을 부여해 점수가 완전히 제외되지 않게 한다.</p>
+                        <p style="margin-top:12px;"><strong>계산식</strong><br>의원 종합점수 = Σ(회의별 점수 × max(해당 회의 막말/궤변 사례 수, 1)) / Σ(max(해당 회의 막말/궤변 사례 수, 1))</p>
+                    </article>
+                    <article class="card">
+                        <h3>3. 정당 점수 계산 방식</h3>
+                        <p>정당 점수는 정당 소속 의원들의 종합점수를 평균한 값이다. 즉 회의 단위 데이터를 바로 정당으로 합치지 않고, 먼저 의원별 종합점수를 만든 다음 이를 정당별로 평균낸다. 정당 막말/궤변 사례 수는 소속 의원들의 사례 총합으로 별도 집계한다.</p>
+                        <p style="margin-top:12px;"><strong>계산식</strong><br>정당 점수 = 소속 의원 종합점수 평균<br>정당 막말/궤변 사례 수 = 소속 의원 막말/궤변 사례 수 합계</p>
+                    </article>
+                </div>
+    
+            </section>
+            <section class="panel panel-section" style="margin-top:24px;">
+                <div class="section-heading">
+                    <p class="section-kicker navy">Model</p>
+                    <h2 class="section-title">AI 모델 및 프롬프트</h2>
+                </div>
+                <div class="section-grid" style="margin-top:24px;">
+                    <article class="panel-soft"><p class="meta">사용 모델</p><div style="margin-top:12px; font-size:1.1rem; font-weight:600;">gemma-4-31b-it</div></article>
+                    <article class="panel-soft"><p class="meta">프롬프트 ID</p><div style="margin-top:12px; font-size:1.1rem; font-weight:600;">session-v1</div></article>
+                </div>
+                <article class="panel-soft" style="margin-top:24px;">
+                    <p class="meta">프롬프트 원문</p>
+                    <pre style="margin-top:12px; white-space:pre-wrap; word-break:break-word; font: 0.95rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; color:var(--ink);">당신은 국회 회의록 분석 전문가입니다. 아래는 &#x27;{source_name}&#x27; 회의의 전체 대화 내용입니다.
+대화의 맥락을 충분히 파악하여 다음 두 가지 분석 결과를 도출하세요.
+
+1. [사례 분석]: 국회의원이나 관계자의 발언 중 &#x27;막말&#x27; 또는 &#x27;궤변&#x27;에 해당하는 구체적인 사례를 모두 찾아내세요.
+   - &#x27;막말&#x27;: 비속어, 인신공격, 모욕적 표현, 상대방을 비하하는 발언.
+   - &#x27;궤변&#x27;: 질문에 대한 회피, 논리적 모순, 사실 왜곡, 맥락에 맞지 않는 억지 주장.
+
+2. [종합 평가]: 회의 전체에서 각 발언자가 보여준 언행의 &#x27;부적절함(막말/궤변 정도)&#x27;을 10점 만점으로 평가하세요.
+   - 0~2점: 매우 품격 있고 논리적인 발언.
+   - 3~5점: 가끔 감정적이거나 논리가 부족함.
+   - 6~8점: 빈번한 인신공격이나 억지 주장.
+   - 9~10점: 극도로 무례하거나 회의 진행을 방해하는 수준의 궤변/막말.
+
+[분석할 전체 대화]
+{transcript}
+
+[응답 형식]
+반드시 아래와 같은 JSON 구조로만 답변하세요. 다른 설명은 생략하세요:
+{{
+  &quot;findings&quot;: [
+    {{
+      &quot;speaker&quot;: &quot;발언자 성명&quot;,
+      &quot;speech&quot;: &quot;문제가 된 발언 내용의 핵심 부분 (말줄임 없이)&quot;,
+      &quot;category&quot;: &quot;막말&quot; | &quot;궤변&quot;,
+      &quot;reason&quot;: &quot;앞뒤 맥락을 고려했을 때 왜 그렇게 판단했는지에 대한 근거 (150자 이내)&quot;
+    }},
+    ...
+  ],
+  &quot;speaker_scores&quot;: [
+    {{
+      &quot;speaker&quot;: &quot;발언자 성명&quot;,
+      &quot;score&quot;: 0.0,
+      &quot;reason&quot;: &quot;이 발언자의 전체적인 태도와 발언 품질에 대한 종합 평가 (100자 이내)&quot;
+    }},
+    ...
+  ]
+}}</pre>
+                </article>
+            </section>
+            
+    <footer class="footer site-footer">
+        <p>업데이트 날짜: 2026-04-09 16:33 KST</p>
+        <p><a class="footer-feedback-link" href="https://docs.google.com/forms/d/e/1FAIpQLScNinEXD9uYYJbw6YRgSNBpDzGLiDrrr8Ak8-Nem0pbVrxCcg/viewform?usp=dialog" target="_blank" rel="noreferrer">의견 남기기</a></p>
+    </footer>
+    
+        </main>
+    </div>
+    
+</body>
+</html>
